@@ -1,4 +1,11 @@
 # A Simple Flutter App for Edge Detection in Images
+## ![WhatsApp Image 2024-11-21 at 14 05 13](https://github.com/user-attachments/assets/cae5fde3-09f4-4610-8662-441b2109a48b)
+
+
+https://github.com/user-attachments/assets/be19d8c7-70e5-4870-bacd-714dafe6f528
+
+Visuals
+
 
 ## Project Overview
 This project is a straightforward yet powerful Flutter app designed to efficiently detect edges in images. It's aimed at providing a comprehensive solution for document scanning and image processing tasks. With a user-friendly interface and high performance, this app ensures precise edge detection for various applications.
