@@ -25,27 +25,27 @@ This project is a straightforward yet powerful Flutter app designed to efficient
 - **Device/Emulator**: A physical device or emulator to run the app.
 Clone the repository:
 
-sh
-git clone https://github.com/yourusername/your-repo-name.git
-cd your-repo-name
-Install dependencies:
 
-sh
-flutter pub get
-Run the app:
+**git clone https://github.com/yourusername/your-repo-name.git
+**cd your-repo-name
+**Install dependencies:
 
-sh
-flutter run
+
+**flutter pub get
+**Run the app:
+
+
+**flutter run
 Additional Configurations
 Permissions: Ensure the necessary permissions are set in AndroidManifest.xml (for Android) and Info.plist (for iOS) for camera and storage access.
 
 
-Architectural Decisions
-Flutter Framework
+##Architectural Decisions
+**Flutter Framework
 The app is built using the Flutter framework due to its cross-platform capabilities, allowing for a single codebase that runs on both iOS and Android devices. This ensures a consistent user experience across all platforms.
 
-MVC Pattern
+**MVC Pattern
 The app follows the MVC (Model-View-Controller) architectural pattern to separate the app's data, UI, and control logic. This separation enhances maintainability and scalability.
 
-Image Processing
+**Image Processing
 The app leverages efficient image processing techniques to detect edges. By utilizing libraries such as image and mlkit and tflite, the app ensures high accuracy and performance in edge detection.
