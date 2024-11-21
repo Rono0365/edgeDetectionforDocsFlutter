@@ -26,7 +26,7 @@ This project is a straightforward yet powerful Flutter app designed to efficient
 Clone the repository:
 
 
-**git clone [https://github.com/yourusername/your-repo-name.git](https://github.com/Rono0365/edgeDetectionforDocsFlutter.git)
+**git clone https://github.com/Rono0365/edgeDetectionforDocsFlutter.git
 **cd your-repo-name
 **Install dependencies:
 
