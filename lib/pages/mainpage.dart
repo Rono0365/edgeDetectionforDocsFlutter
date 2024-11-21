@@ -1628,7 +1628,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                     sourceLatLng: LatLng(lat1, long1),
                           destinationLatLng: LatLng(-1.234, 34.7),
                                 
-                          apiKey:"AIzaSyBd3tnhU3mNNEfG09l8r6BMAo-2dHvN06s",
                                     profile(
                                       pics: pic_url,
                                       unfo: sky3,
