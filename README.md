@@ -1,16 +1,51 @@
-# edge3
+# Edge3 -a simple Flutter App for Edge Detection in Images
+## ![WhatsApp Image 2024-11-21 at 14 05 13](https://github.com/user-attachments/assets/cae5fde3-09f4-4610-8662-441b2109a48b)
 
-A new Flutter project.
 
-## Getting Started
+https://github.com/user-attachments/assets/be19d8c7-70e5-4870-bacd-714dafe6f528
 
-This project is a starting point for a Flutter application.
+Visuals
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Project Overview
+This project is a straightforward yet powerful Flutter app designed to efficiently detect edges in images. It's aimed at providing a comprehensive solution for document scanning and image processing tasks. With a user-friendly interface and high performance, this app ensures precise edge detection for various applications.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Features
+- Fast and accurate edge detection
+- Intuitive and easy-to-use interface
+- Supports multiple image formats
+- Ideal for document scanning and image processing
+
+## Setup Instructions
+
+### Prerequisites
+- **Flutter SDK**: Ensure you have Flutter installed. You can download it from [flutter.dev](https://flutter.dev).
+- **Dart SDK**: Usually bundled with Flutter, but make sure it's up-to-date.
+- **IDE**: Preferably Visual Studio Code or Android Studio with Flutter and Dart plugins.
+- **Device/Emulator**: A physical device or emulator to run the app.
+Clone the repository:
+
+
+**git clone https://github.com/Rono0365/edgeDetectionforDocsFlutter.git
+**cd your-repo-name
+**Install dependencies:
+
+
+**flutter pub get
+**Run the app:
+
+
+**flutter run
+Additional Configurations
+Permissions: Ensure the necessary permissions are set in AndroidManifest.xml (for Android) and Info.plist (for iOS) for camera and storage access.
+
+
+##Architectural Decisions
+**Flutter Framework
+The app is built using the Flutter framework due to its cross-platform capabilities, allowing for a single codebase that runs on both iOS and Android devices. This ensures a consistent user experience across all platforms.
+
+**MVC Pattern
+The app follows the MVC (Model-View-Controller) architectural pattern to separate the app's data, UI, and control logic. This separation enhances maintainability and scalability.
+
+**Image Processing
+The app leverages efficient image processing techniques to detect edges. By utilizing libraries such as image and mlkit and tflite, the app ensures high accuracy and performance in edge detection.
