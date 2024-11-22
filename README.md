@@ -46,6 +46,7 @@ The app is built using the Flutter framework due to its cross-platform capabilit
 
 **MVC Pattern
 The app follows the MVC (Model-View-Controller) architectural pattern to separate the app's data, UI, and control logic. This separation enhances maintainability and scalability.
+As a Flutter developer, I've found the BLoC pattern to be a game-changer in crafting robust and scalable mobile applications. This architectural approach effectively separates the business logic from the UI, leading to a cleaner, more testable, and maintainable codebase.
 
 **Image Processing
 The app leverages efficient image processing techniques to detect edges. By utilizing libraries such as image and mlkit and tflite, the app ensures high accuracy and performance in edge detection.
