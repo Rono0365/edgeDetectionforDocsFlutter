@@ -28,7 +28,7 @@ Clone the repository:
 
 **git clone https://github.com/Rono0365/edgeDetectionforDocsFlutter.git
 **cd your-repo-name
-**Install dependencies:
+##Install dependencies:
 
 
 **flutter pub get
