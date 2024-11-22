@@ -40,7 +40,7 @@ Additional Configurations
 Permissions: Ensure the necessary permissions are set in AndroidManifest.xml (for Android) and Info.plist (for iOS) for camera and storage access.
 
 
-##Architectural Decisions
+Architectural Decisions
 **Flutter Framework
 The app is built using the Flutter framework due to its cross-platform capabilities, allowing for a single codebase that runs on both iOS and Android devices. This ensures a consistent user experience across all platforms.
 
