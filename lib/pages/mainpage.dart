@@ -2,7 +2,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math' show cos, sqrt, asin;
-import 'package:avatar_glow/avatar_glow.dart';
 //import 'package:edge3/accounts/profile.dart';
 import 'package:edge3/pages/page1.dart';
 import 'package:edge3/pages/page2.dart';

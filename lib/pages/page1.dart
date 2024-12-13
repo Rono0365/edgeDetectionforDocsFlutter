@@ -5,8 +5,6 @@ import "package:edge3/pages/page2.dart";
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
 import "package:ionicons/ionicons.dart";
-import 'package:flutter_pdfview/flutter_pdfview.dart';
-import 'package:google_mlkit_document_scanner/google_mlkit_document_scanner.dart';
 import 'package:path_provider/path_provider.dart';
 
 class Page1 extends StatefulWidget {
@@ -30,7 +28,6 @@ class _Page1State extends State<Page1> {
   return double.parse(multiplier.toStringAsFixed(4));
 }
 
-DocumentScanningResult? _result;
 int _selectedIndex =0;
 bool adbx =true;
 bool all=true;
@@ -380,29 +377,33 @@ Widget _buildContainer(String text, int index) {
                   adbx = adbx?false:true;
                 });
               },
-              child: Container(
-                    //margin: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(10),
+              child: Center(
+                child: Container(
+                  height: 50,
+                  width:200,
+                      //margin: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                        child: 
+                 Center(
+                   child: Text(
+                     'Send New Message',
+                       style:          GoogleFonts.dmSans(
+                      // fontSize: 12,
+                       fontWeight: FontWeight.w600,
+                       color: Colors.white,
+                     ),
+                   ),
+                 ),
+                          
+                          
+                      ),
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                      child: 
-               Expanded(
-                child: Text(
-                  'Send New Message',
-                    style:          GoogleFonts.dmSans(
-                   // fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
-                  ),
-                ),
               ),
-                        
-                        
-                    ),
-                  ),
             ),
             const ListTile(),
             const ListTile()

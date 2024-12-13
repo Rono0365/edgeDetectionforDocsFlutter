@@ -97,90 +97,108 @@ class _ChatPageState extends State<ChatPage> {
           },
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            ListTile(),
-            Text("Today"),
-            SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height*.7,
-              child: ListView.builder(
-                itemCount: messages.length,
-                itemBuilder: (context, index) {
-                  final message = messages[index];
-                  return ListTile(
-                    title: Row(
-                      mainAxisAlignment:
-                          message.isSender ? MainAxisAlignment.end : MainAxisAlignment.start,
-                      children: [
-                        if (!message.isSender)
-                          CircleAvatar(
-                            backgroundColor: Colors.transparent,
-                           // backgroundImage: AssetImage('assets/profile_pic.png'), // Replace with actual image
-                          ),
-                          SizedBox(width: 5,),
-                        Stack(
-                          clipBehavior: Clip.none,
-                          children: [
-                            Flexible(
-                              child: Container(
+      body: 
+         Column(
+           children: [
+             Expanded(
+                child: Container(
+                  // height: MediaQuery.of(context).size.height*.9,
+                  child: ListView(
+             //                controller: _scrollController,
+                    children: [
+                        ListTile(),
+              Center(child: Text("Today")),
+              SizedBox(
+                height: 10,
+              ),
+                     
+                      ...messages.map((i)=>
+                        Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Container(
+                            constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width*.6),
+                            child:  Row(
+                            mainAxisAlignment:
+                                i.isSender ? MainAxisAlignment.end : MainAxisAlignment.start,
+                            children: [
+                              if (!i.isSender)
+                                CircleAvatar(
+                                  backgroundColor: Colors.transparent,
+                                 // backgroundImage: AssetImage('assets/profile_pic.png'), // Replace with actual image
+                                ),
+                                SizedBox(width: 5,),
+                              Container(
                                 constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width*.7),
-                                padding: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                border: Border.all(
-                                  color:!message.isSender ? Colors.blue:Colors.transparent,
-                                  width: 1, // 1-pixel border width
-                                ),
-                                  color: message.isSender ? Colors.grey[200] : Colors.transparent,
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                      
+                                child: Stack(
+                                  clipBehavior: Clip.none,
                                   children: [
-                                    Text(message.message),
-                                    Text(message.time),
+                                    Container(
+                                      constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width*.7),
+                                      padding: EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color:!i.isSender ? Colors.blue:Colors.transparent,
+                                        width: 1, // 1-pixel border width
+                                      ),
+                                        color: i.isSender ? Colors.grey[200] : Colors.transparent,
+                                        borderRadius: BorderRadius.circular(15),
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(i.message,  style:          GoogleFonts.dmSans(
+                                         // fontSize: 12,
+                                          fontWeight: FontWeight.normal,
+                                          color: Colors.black,
+                                        ),),
+                                          Text(i.time,  style:          GoogleFonts.dmSans(
+                                         // fontSize: 12,
+                                          fontWeight: FontWeight.normal,
+                                          color: Colors.black
+                                        ),),
+                                        ],
+                                      ),
+                                    ),
+                                !i.isSender ? Positioned(
+                                  left: -50,
+                                  bottom: 0,
+                                  child:  CircleAvatar(
+                                                            backgroundColor: Colors.grey.shade100,
+                                                            child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Center(child: Image.asset("assets/image.png")),
+                                                            ),
+                                                    ),):SizedBox()
                                   ],
                                 ),
                               ),
-                            ),
-                        !message.isSender ? Positioned(
-                          left: -50,
-                          bottom: 0,
-                          child:  CircleAvatar(
-                      backgroundColor: Colors.grey.shade100,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(child: Image.asset("assets/image.png")),
-                      ),
-                    ),):SizedBox()
-                          ],
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ),
-            Container(
-            padding: EdgeInsets.all(12),
-            color: Colors.white,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-          Container(
-            height: 40,
-            width: 40,
-            //radius: 20,
-            //backgroundColor: Colors.transparent,
-            child:  Image.asset("assets/Group 1797 (1).png")
-            
-          ),
-        SizedBox(
-          height: 55,
-          width: MediaQuery.of(context).size.width*.8,
+                            ],
+                                                  ),
+                                                
+                          ),
+                        )
+                 
+                      )
+                    ]))),
+                     Container(
+          padding: EdgeInsets.all(12),
+          color: Colors.white,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+        Container(
+          height: 40,
+          width: 40,
+          //radius: 20,
+          //backgroundColor: Colors.transparent,
+          child:  Image.asset("assets/Group 1797 (1).png")
+          
+        ),
+      SizedBox(
+        height: 55,
+        width: MediaQuery.of(context).size.width*.8,
+        child: Center(
           child: TextField(
             
             decoration: InputDecoration(
@@ -222,6 +240,11 @@ class _ChatPageState extends State<ChatPage> {
                 ),
               ),
               hintText: 'Start typing a message',
+              hintStyle:           GoogleFonts.dmSans(
+                                         // fontSize: 12,
+                                          fontWeight: FontWeight.normal,
+                                          color: Colors.black,
+                                        ),
               border: OutlineInputBorder(
                 borderSide: BorderSide(color: Color(0xFF004AAD)),
                 borderRadius: BorderRadius.circular(20),
@@ -229,13 +252,26 @@ class _ChatPageState extends State<ChatPage> {
             ),
           ),
         ),
-        
-              ],
-            ),
-          )
-          ],
-        ),
       ),
+      
+            ],
+          ),
+        )
+        
+           ],
+         ),
+         /* Container(
+            height: MediaQuery.of(context).size.height*.7,
+            child: ListView.builder(
+              itemCount: messages?.length ?? 0,
+              itemBuilder: (context, index) {
+                final message = messages[index];
+                return 
+               },
+            ),
+          ),
+        */  
+        
      );
   }
 }
