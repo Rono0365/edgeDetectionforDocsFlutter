@@ -1,6 +1,7 @@
 
 import "dart:io";
 
+import "package:edge3/pages/page2.dart";
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
 import "package:ionicons/ionicons.dart";
@@ -21,161 +22,388 @@ class _Page1State extends State<Page1> {
   // Reference design height (iPhone 13)
   const double referenceScreenHeight = 812.0;
   
+  
   // Calculate the multiplier by dividing the absolute height by reference height
   double multiplier = absoluteHeight / referenceScreenHeight;
   
   // Round to 4 decimal places for cleaner values
   return double.parse(multiplier.toStringAsFixed(4));
 }
+
 DocumentScanningResult? _result;
+int _selectedIndex =0;
+bool adbx =true;
+bool all=true;
+  bool unread=false;
+  bool groups=false;
+Widget _buildContainer(String text, int index) {
+    bool isSelected = _selectedIndex == index;
+
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _selectedIndex = index;
+        });
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        decoration: BoxDecoration(
+          color: isSelected ? Colors.blue : Colors.white,
+          borderRadius: BorderRadius.circular(30), // Border radius of 30
+          border: Border.all(
+            color: isSelected ? Colors.blue : Colors.grey,
+            width: 2,
+          ),
+        ),
+        child: Text(
+          text,
+          style: TextStyle(
+            color: isSelected ? Colors.white : Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        floatingActionButton: adbx?SizedBox():  Container(
+                                child: CircleAvatar(
+                                  radius: 30,
+                                  backgroundColor:Color(0xFF004AAD) ,
+                                  child: Icon(
+                                    Ionicons.add,
+                                    color:Colors.white,
+                                    opticalSize: 30,
+                                        //: Colors.black,
+                                  ),
+                                ),
+                              ),
+      bottomNavigationBar: SizedBox(height:60),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-             SizedBox(height: MediaQuery.of(context).size.height*getHeightMultiplier(10)),
-            Padding(
-                                padding: const EdgeInsets.all(15.0),
-                                child: Stack(
-                                  children: [
-                                    Container(
-                                      height: 180,
-                                      width:
-                                          MediaQuery.of(context).size.width ,
-                                      decoration: BoxDecoration(
-                                         image: const DecorationImage(
-                                      image: AssetImage("assets/laptop.png",), // Replace with your image path
-                                      fit: BoxFit.cover, // Adjust fit as needed (cover, contain, etc.)
-                                    ),
-                                          /*
-                                        Colors.lightBlue,
-                                      Colors.green,
-                                      Colors.deepOrange,
-                                      Colors.red,
-                                      Colors.orange,
-                                        */
-                                          color: Colors.transparent,
-                                          borderRadius:
-                                              BorderRadius.circular(20.0)),
-                                      child: Column(
-                                        children: [
-                                          const SizedBox(
-                                            height: 20,
-                                          ),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: SizedBox(
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintStyle:  GoogleFonts.dmSans(
+                   // fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.grey.shade700,
+                  ),
+                      hintText: 'Search here',
+                      prefixIcon: Icon(Ionicons.search_outline),
+                      fillColor: Colors.grey.shade200.withOpacity(0.6),
+                      filled: true,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        borderSide: BorderSide.none,
+                      ),
+                    ),
+                  ),
+                ),
+              ),                                       
+                  Row(
+                    children: [
+                      SizedBox(width: 10,),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width*.6,
+                        child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                InkWell(
+                                                                        onTap: (){
+                                                                            setState(() {
+                                                                            all = all?false: true;
+                                                                            groups =false;
+                                                                            unread =false;
+                                                                         
+                                                                          });
+                                                                        },
+                                                                        child: Padding(
                                           
-                                        ],
-                                      ),
-                                    ),
-                                
-                                
-                                    Container(
-                                      height: 180,
-                                      width:
-                                          MediaQuery.of(context).size.width ,
-                                      decoration: BoxDecoration(
-                                       gradient: LinearGradient(
-                                      begin: Alignment.bottomLeft,
-                                      end: Alignment.topRight,
-                                      colors: [
-                                       Colors.blue.withOpacity(0.9),
-                                       Colors.blue.withOpacity(0.6),
-                                       Colors.blue.withOpacity(0.4),
-                                       Colors.blue.withOpacity(0.3),
-                                      Colors.blue.withOpacity(0.2),
-                                      ],
-                                    ),
-                                          /*
-                                        Colors.lightBlue,
-                                      Colors.green,
-                                      Colors.deepOrange,
-                                      Colors.red,
-                                      Colors.orange,
-                                        */
-                                        //  color: Colors.lightBlue.withOpacity(0.5),
-                                          borderRadius:
-                                              BorderRadius.circular(20.0)),
-                                      child: Column(
-                                        children: [
-                                          const SizedBox(
-                                            height: 20,
-                                          ),
-                                          ListTile(
-                                              title: Text(
-                                              " ",//"${widget.cattendance.where((p) => p["name"].toString().replaceAll(",", "") == widget.username).toSet().toList().length}", //chnge
-                                              style: GoogleFonts.montserrat(
-                                                fontSize: 22,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                                ),
-                                          
-                                        ],
-                                      ),
-                                    ),
-                                    Positioned(
-                                      bottom: 10,
-                                      left: 10,
-                                      right:10,
-                                      top: 10,
-                                      child:Center(
-                                        child: Text("Your Digital Document Assistant",
-                                        textAlign: TextAlign.center,
-                                                 style: GoogleFonts.montserrat(
-                                                    fontSize: 25,
-                                                    fontWeight: FontWeight.bold,
-                                                    color:  Colors.white,
-                                                  ),),
-                                      ),)
-                                  ],
+                                                                          padding:
+                                                                              const EdgeInsets
+                                                                                  .only(
+                                                                                  top:3.0,bottom: 3.0),
+                                                                          child:
+                                                                              ClipRRect(
+                                                                            borderRadius:
+                                                                                BorderRadius
+                                                                                    .circular(
+                                                                                        10),
+                                                                            child:
+                                                                                Container(
+                                                                              height: 40,
+                                                                              decoration:
+                                                                                  BoxDecoration(
+                                                                                color: all? Color.fromRGBO(33, 150, 243, 1)
+                                                                                    .withOpacity(
+                                                                                        0.3):Colors.grey.shade200.withOpacity(0.6),
+                                                                                borderRadius:
+                                                                                    BorderRadius.circular(
+                                                                                        20),
+                                                                              ),
+                                                                              child:
+                                                                                  Padding(
+                                                                                padding: const EdgeInsets
+                                                                                    .all(
+                                                                                    4.0),
+                                                                                child:
+                                                                                    Row(
+                                                                                  mainAxisSize:
+                                                                                      MainAxisSize.min,
+                                                                                  children: [
+                                                                                    const SizedBox(
+                                                                                      width:
+                                                                                          15,
+                                                                                    ),
+                                                                                    Text(
+                                                                                      "All",
+                                                                                      style:  GoogleFonts.dmSans(
+                                                   // fontSize: 12,
+                                                    fontWeight: FontWeight.w400,
+                                                    color:all? Colors.blue.shade700:Colors.grey.shade700,
+                                                  ),
+                                                                                    ),
+                                                                                    const SizedBox(
+                                                                                      width:
+                                                                                          15,
+                                                                                    ),
+                                                                                  ],
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ),
                                 ),
-                              ),
-            SizedBox(height: 10,),
-              ListTile(
-            
-        
-            title: Text("Your documents",style: GoogleFonts.dmSans(
-                                                      fontSize: 20,
-                                                      fontWeight: FontWeight.w500,
-                                                      color:  Colors.blueGrey.shade900,
-                                                    ),),),
-        
-                                                     SizedBox(
-                                                      height:  200,//MediaQuery.of(context).size.height* getHeightMultiplier(750),
-                                                       child: ImageGalleryPage(),
-                                                       
-                                                      /* Wrap(
-                                                        alignment: WrapAlignment.center,
-                                                        runSpacing: 10.0,
-                                                        spacing: 5.0,
-                                                        //physics: NeverScrollableScrollPhysics(),
-                                                        //gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-                                                         // shrinkWrap: true,
 
-                                                        
-                                                                //   crossAxisCount: 2,
-                                                                  // childAspectRatio: 1.2,
-                                                                   //crossAxisSpacing: 16,
-                                                                   //mainAxisSpacing: 16,
-                                                                   children: [
-                                                                                           ...["Form 4\nelectromagnetism","Form 3\nBiology Human","Form 2\nMaths Trigonometry","Form 4\nelectricity"].map((i)=>                
-                                                                                        Padding(
-                                                                                          padding: const EdgeInsets.all(3.0),
-                                                                                          child: CourseCard(
-                                                                                            courseName: "$i",
-                                                                                            onViewDetails: () {
-                                                                                              // Handle view course action
-                                                                                            },
-                                                                                          ),
-                                                                                        )   )
-                                                            ],),*/
-                                                     ),
-                                                        
-                                                      
-                                                    
-            
+
+                                                                      InkWell(
+                                                                        onTap: (){
+                                                                          setState(() {
+                                                                            groups = groups?false: true;
+                                                                            all = false;
+                                                                            unread=false;
+                                                                         
+                                                                          });
+                                                                        },
+                                                                        child: Padding(
+                                                                                                                
+                                                                          padding:
+                                                                              const EdgeInsets
+                                                                                  .only(
+                                                                                  top:3.0,bottom: 3.0),
+                                                                          child:
+                                                                              ClipRRect(
+                                                                            borderRadius:
+                                                                                BorderRadius
+                                                                                    .circular(
+                                                                                        10),
+                                                                            child:
+                                                                                Container(
+                                                                              height: 40,
+                                                                              decoration:
+                                                                                  BoxDecoration(
+                                                                                color: 
+                                                  groups? Color.fromRGBO(33, 150, 243, 1)
+                                                                                    .withOpacity(
+                                                                                        0.3):Colors.grey.shade200.withOpacity(0.6),
+                                                                                borderRadius:
+                                                                                    BorderRadius.circular(
+                                                                                        20),
+                                                                              ),
+                                                                              child:
+                                                                                  Padding(
+                                                                                padding: const EdgeInsets
+                                                                                    .all(
+                                                                                    4.0),
+                                                                                child:
+                                                                                    Row(
+                                                                                  mainAxisSize:
+                                                                                      MainAxisSize.min,
+                                                                                  children: [
+                                                                                    const SizedBox(
+                                                                                      width:
+                                                                                          10,
+                                                                                    ),
+                                                                                    Text(
+                                                                                      "Groups",
+                                                                                      style:          GoogleFonts.dmSans(
+                                                                                         // fontSize: 12,
+                                                                                          fontWeight: FontWeight.w400,
+                                                                                          color:groups? Colors.blue.shade700:Colors.grey.shade700,
+                                                                                        ),),
+                                                                                    const SizedBox(
+                                                                                      width:
+                                                                                          10,
+                                                                                    ),
+                                                                                  ],
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                      InkWell(
+                                                                        onTap: (){
+                                                                          setState(() {
+                                                                            unread =unread?false: true;
+                                                                            all=false;
+                                                                            groups=false;
+                                                                          });
+                                                                        },
+                                                                        child: Padding(
+                                                                                                                
+                                                                          padding:
+                                                                              const EdgeInsets
+                                                                                  .only(
+                                                                                  top:3.0,bottom: 3.0),
+                                                                          child:
+                                                                              ClipRRect(
+                                                                            borderRadius:
+                                                                                BorderRadius
+                                                                                    .circular(
+                                                                                        10),
+                                                                            child:
+                                                                                Container(
+                                                                              height: 40,
+                                                                              decoration:
+                                                                                  BoxDecoration(
+                                                                                color:
+                                                    unread? Color.fromRGBO(33, 150, 243, 1)
+                                                                                    .withOpacity(
+                                                                                        0.3):Colors.grey.shade200.withOpacity(0.6),
+                                                                                borderRadius:
+                                                                                    BorderRadius.circular(
+                                                                                        20),
+                                                                              ),
+                                                                              child:
+                                                                                  Padding(
+                                                                                padding: const EdgeInsets
+                                                                                    .all(
+                                                                                    4.0),
+                                                                                child:
+                                                                                    Row(
+                                                                                  mainAxisSize:
+                                                                                      MainAxisSize.min,
+                                                                                  children: [
+                                                                                    const SizedBox(
+                                                                                      width:
+                                                                                          10,
+                                                                                    ),
+                                                                                    Text(
+                                                                                      "Unread",
+                                                                                      style:          GoogleFonts.dmSans(
+                                                                                         // fontSize: 12,
+                                                                                          fontWeight: FontWeight.w400,
+                                                                                          color: unread? Colors.blue.shade700:Colors.grey.shade700,
+                                                                                        ),),
+                                                                                    const SizedBox(
+                                                                                      width:
+                                                                                          10,
+                                                                                    ),
+                                                                                  ],
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                      
+                              
+                              ],
+                            ),
+                      ),
+                    ],
+                  ),                  
+               all?    ChatListTile(
+            name: 'John Doe',
+            lastMessage: 'Hey, how are you?',
+            avatarUrl: 'https://example.com/avatar.jpg',
+            isRead: false,
+          ):unread?ChatListTile(
+            name: 'John Doe',
+            lastMessage: 'Hey, how are you?',
+            avatarUrl: 'https://example.com/avatar.jpg',
+            isRead: false,
+          ):SizedBox(),
+          all? ChatListTile(
+            name: 'John Doe',
+            lastMessage: 'Hey, how are you?',
+            avatarUrl: 'https://example.com/avatar.jpg',
+            isRead: false,
+          ):SizedBox(), 
+          
+          all?ChatListTile(
+            name: 'John Doe',
+            lastMessage: 'Hey, how are you?',
+            avatarUrl: 'https://example.com/avatar.jpg',
+            isRead: false,
+          ):SizedBox(),
+          all?ChatListTile(
+            name: 'Jane Smith',
+            lastMessage: 'Meeting at 2 PM',
+            avatarUrl: 'https://example.com/avatar2.jpg',
+            isRead: true,
+          ):SizedBox(),
+           all?      ChatListTile2(
+            name: 'Group Name',
+            lastMessage: 'Hey, how are you?',
+            avatarUrl: 'https://example.com/avatar.jpg',
+            isRead: false,
+          ):groups?ChatListTile2(
+            name: 'Group Name',
+            lastMessage: 'Hey, how are you?',
+            avatarUrl: 'https://example.com/avatar.jpg',
+            isRead: false,
+          ):SizedBox(),all?      ChatListTile2(
+            name: 'Family Group',
+            lastMessage: 'Hey, how are you?',
+            avatarUrl: 'https://example.com/avatar.jpg',
+            isRead: false,
+          ):groups?ChatListTile2(
+            name: 'Family Group',
+            lastMessage: 'Hey, how are you?',
+            avatarUrl: 'https://example.com/avatar.jpg',
+            isRead: false,
+          ):SizedBox(),
+          ListTile(),            
+            InkWell(
+              onTap: (){
+                setState(() {
+                  adbx = adbx?false:true;
+                });
+              },
+              child: Container(
+                    //margin: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      child: 
+               Expanded(
+                child: Text(
+                  'Send New Message',
+                    style:          GoogleFonts.dmSans(
+                   // fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+                        
+                        
+                    ),
+                  ),
+            ),
             const ListTile(),
             const ListTile()
             ]
@@ -347,5 +575,402 @@ class ImageGalleryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return  ImageRetriever().displayImagesFromPath()
     ;
+  }
+}
+class ChatListTile extends StatelessWidget {
+  final String name;
+  final String lastMessage;
+  final String avatarUrl;
+  final bool isRead;
+
+  const ChatListTile({
+    Key? key,
+    required this.name,
+    required this.lastMessage,
+    required this.avatarUrl,
+    this.isRead = false,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return  InkWell(
+      onTap: (){
+        Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>ChatPage(title: name,)));
+      }
+      ,
+      child: Dismissible(
+        key: Key(name), // Unique key for each list tile
+        background: Container(
+          color: Colors.blue,
+          alignment: Alignment.centerRight,
+          padding: const EdgeInsets.only(right: 20),
+          child: const Icon(
+            Icons.more_horiz,
+            color: Colors.white,
+            size: 30,
+          ),
+        ),
+        secondaryBackground: Container(
+          color: Color(0xFF004AAD),
+          alignment: Alignment.centerRight,
+          padding: const EdgeInsets.only(left: 20),
+          child: Container(
+            width: 80,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              
+                  children: [
+                    const Icon(
+                      Icons.more_horiz,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                    Text(
+                  "More",
+                   style:          GoogleFonts.dmSans(
+                         // fontSize: 12,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.white,
+                        ),
+                 
+                ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+        confirmDismiss: (direction) async {
+          if (direction == DismissDirection.endToStart) {
+            // More options logic
+            _showMoreOptions(context);
+            return false; // Prevent actual dismissal
+          } else if (direction == DismissDirection.startToEnd) {
+            // Delete logic
+            return await _showDeleteConfirmation(context);
+          }
+          return false;
+        },
+        child: ListTile(
+          leading: CircleAvatar(
+            backgroundColor: Colors.grey.shade100,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Center(child: Image.asset("assets/image.png")),
+            ),
+          ),
+          title: Text(
+            name,
+             style:          GoogleFonts.dmSans(
+                   // fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black,
+                  ),
+           
+          ),
+          subtitle: Text(
+            lastMessage,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: GoogleFonts.dmSans(
+              color: Colors.grey.shade700, //isRead ? Colors.grey : Colors.black,
+            ),
+          ),
+          trailing: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                '1 hour ago', // Replace with actual timestamp
+                
+             style:          GoogleFonts.dmSans(
+                    fontSize: 14,fontWeight: FontWeight.normal,
+                    color:Color(0xFF004AAD),
+                  ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showMoreOptions(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: const Icon(Icons.pin_drop),
+                title: const Text('Pin Chat'),
+                onTap: () {
+                  Navigator.pop(context);
+                  // Add pin logic
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.archive),
+                title: const Text('Archive Chat'),
+                onTap: () {
+                  Navigator.pop(context);
+                  // Add archive logic
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.notifications_off),
+                title: const Text('Mute Notifications'),
+                onTap: () {
+                  Navigator.pop(context);
+                  // Add mute logic
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Future<bool> _showDeleteConfirmation(BuildContext context) async {
+    return await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Delete Chat'),
+          content: const Text('Are you sure you want to delete this chat?'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: const Text('Delete'),
+            ),
+          ],
+        );
+      },
+    ) ?? false;
+  }
+}
+
+class ChatListTile2 extends StatelessWidget {
+  final String name;
+  final String lastMessage;
+  final String avatarUrl;
+  final bool isRead;
+
+  const ChatListTile2({
+    Key? key,
+    required this.name,
+    required this.lastMessage,
+    required this.avatarUrl,
+    this.isRead = false,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: (){
+         Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>ChatPage(title: name,)));
+      
+        
+      },
+      child: Dismissible(
+        key: Key(name), // Unique key for each list tile
+        background: Container(
+          color: Colors.blue,
+          alignment: Alignment.centerRight,
+          padding: const EdgeInsets.only(right: 20),
+          child: const Icon(
+            Icons.more_horiz,
+            color: Colors.white,
+            size: 30,
+          ),
+        ),secondaryBackground: Container(
+          color: Color(0xFF004AAD),
+          alignment: Alignment.centerRight,
+          padding: const EdgeInsets.only(left: 20),
+          child: Container(
+            width: 80,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              
+                  children: [
+                    const Icon(
+                      Icons.more_horiz,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                    Text(
+                  "More",
+                   style:          GoogleFonts.dmSans(
+                         // fontSize: 12,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.white,
+                        ),
+                 
+                ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+        confirmDismiss: (direction) async {
+          if (direction == DismissDirection.endToStart) {
+            // More options logic
+            _showMoreOptions(context);
+            return false; // Prevent actual dismissal
+          } else if (direction == DismissDirection.startToEnd) {
+            // Delete logic
+            return await _showDeleteConfirmation(context);
+          }
+          return false;
+        },
+        child: ListTile(
+          leading: Stack(
+            clipBehavior: Clip.none,
+            children: [
+              CircleAvatar(
+                backgroundImage:  AssetImage("assets/Group 177013.png")
+                
+              ),
+              Positioned(
+                bottom: -1,
+                right: -5,
+                child: CircleAvatar(
+                radius: 8,
+                backgroundImage:  AssetImage("assets/Ellipse 83.png")
+                
+              ),)
+            ],
+          ),
+          title: Text(
+            name,
+             style:          GoogleFonts.dmSans(
+                   // fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black,
+                  ),
+           
+          ),
+          subtitle: Row(
+            children: [
+              Text(
+                "Anna: " ,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                
+             style:          GoogleFonts.dmSans(
+                   // fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xFF004AAD)
+                  ),
+              ),
+              Text(
+                lastMessage,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: GoogleFonts.dmSans(
+                  color: Colors.grey.shade700, //isRead ? Colors.grey : Colors.black,
+                ),
+              ),
+            ],
+          ),
+          trailing: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                '1 hour ago', // Replace with actual timestamp
+                
+             style:          GoogleFonts.dmSans(
+                   fontSize: 14,
+                    fontWeight: FontWeight.normal,
+                    color: Color(0xFF004AAD)
+                  ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showMoreOptions(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: const Icon(Icons.pin_drop),
+                title: const Text('Pin Chat'),
+                onTap: () {
+                  Navigator.pop(context);
+                  // Add pin logic
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.archive),
+                title: const Text('Archive Chat'),
+                onTap: () {
+                  Navigator.pop(context);
+                  // Add archive logic
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.notifications_off),
+                title: const Text('Mute Notifications'),
+                onTap: () {
+                  Navigator.pop(context);
+                  // Add mute logic
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Future<bool> _showDeleteConfirmation(BuildContext context) async {
+    return await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Delete Chat'),
+          content: const Text('Are you sure you want to delete this chat?'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: const Text('Delete'),
+            ),
+          ],
+        );
+      },
+    ) ?? false;
   }
 }

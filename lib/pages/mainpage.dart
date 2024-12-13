@@ -1,11 +1,9 @@
-
-//don't commit to the main branch
 //author: Kiprono N.
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math' show cos, sqrt, asin;
 import 'package:avatar_glow/avatar_glow.dart';
-import 'package:edge3/accounts/profile.dart';
+//import 'package:edge3/accounts/profile.dart';
 import 'package:edge3/pages/page1.dart';
 import 'package:edge3/pages/page2.dart';
 import 'package:edge3/pages/page3.dart';
@@ -1578,38 +1576,113 @@ class _MyHomePageState extends State<MyHomePage> {
   preferredSize: Size(MediaQuery.of(context).size.width, 110),
   child: Padding(
     padding: const EdgeInsets.all(8.0),
-    child: SizedBox(
-      height: 120,
-      child: ListTile(
-        //elevation: 0,
-        //automaticallyImplyLeading: false,
-        tileColor: _currentIndex == 2 
-          ? (darkmode ? Colors.grey[900]?.withOpacity(0.3) : Colors.white?.withOpacity(0.3))
-          : (darkmode ? Colors.grey[900]?.withOpacity(0.3) : Colors.white?.withOpacity(0.3)),
-        title: 
-        
-        _buildTitleSection(context),
-        trailing: Stack(
-          clipBehavior: Clip.none,
-          //mainAxisAlignment: MainAxisAlignment.end,
-          children: [ 
-            CircleAvatar(radius: 25,backgroundColor: Colors.transparent,),
-            Positioned(
-              left: 5,
-              bottom: -30,
-              child: Padding(
-                padding: const EdgeInsets.all(3.0),
-                child: _buildProfileButton(context),
-              ))]),
+    child: AppBar(
+      elevation: 0,
+       toolbarHeight: 120,
+      leading: Container(
+        //alignment: const Alignment(-2, 1),
+        child:   CircleAvatar(radius: 20,backgroundColor: Colors.transparent,child: 
+ CircleAvatar(
+  backgroundColor: Colors.grey.shade200.withOpacity(.6),
+            radius:20,
+            child: Center(child: Icon(Ionicons.menu_outline))),
+        ),
       ),
+      //elevation: 0,
+      //automaticallyImplyLeading: false,
+      backgroundColor: _currentIndex == 2 
+        ? (darkmode ? Colors.grey[900]?.withOpacity(0.3) : Colors.white?.withOpacity(0.3))
+        : (darkmode ? Colors.grey[900]?.withOpacity(0.3) : Colors.white?.withOpacity(0.3)),
+      title: 
+      
+      Text(
+                 'Home',
+                style: GoogleFonts.dmSans(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black,
+                ),
+              ),
+      actions:  [ 
+            SizedBox(
+              width: 60,
+              child: Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  CircleAvatar(radius: 20,backgroundColor: Colors.grey.shade200.withOpacity(0.6),
+                   backgroundImage:  AssetImage("assets/Social Login Button@2x.png")
+                  //child: //Icon(Ionicons.g),
+                  ),
+                Positioned(
+                  
+                  right: -2,
+                  left: -20,
+                  bottom: -25,
+                  child: Center(child: Text("Groups",style: GoogleFonts.dmSans(
+                  fontSize: 10,
+                  fontWeight: FontWeight.w400,
+                  
+                  color: Colors.grey.shade700,
+                ),)))
+                ],
+              ),
+            ),
+           SizedBox(
+            width: 60,
+             child: Stack(
+                clipBehavior: Clip.none,
+                children: [
+                CircleAvatar(radius: 20,backgroundColor: Colors.grey.shade200.withOpacity(0.6),
+                   backgroundImage:  AssetImage("assets/Social Login Button (1).png"))
+                 , Positioned(
+                  
+                  right: -2,
+                  left: -20,
+                  bottom: -25,
+                  child: Center(child: Text("Contacts",style: GoogleFonts.dmSans(
+                  fontSize: 10,
+                  fontWeight: FontWeight.w400,
+                  
+                  color: Colors.grey.shade700,
+                ))))
+                ],
+              ),
+           ),SizedBox(
+            width: 60,
+             child: Stack(
+                clipBehavior: Clip.none,
+                children: [
+                CircleAvatar(radius: 20,backgroundColor: Colors.grey.shade200.withOpacity(0.6),
+                   backgroundImage:  AssetImage("assets/Social Login Button (2).png")),
+                Positioned(
+                  right: -2,
+                  left: -20,
+                  bottom: -25,
+                  child: Center(child: Text("Settings",style: GoogleFonts.dmSans(
+                  fontSize: 10,
+                  fontWeight: FontWeight.w400,
+                  
+                  color: Colors.grey.shade700,
+                ))))
+                ],
+              ),
+           ), 
+            //_buildProfileButton(context),
+            //  CircleAvatar(radius: 20,backgroundColor: Colors.blue,),
+            //_buildProfileButton(context)
+              
+             // SizedBox(width: 13,)
+             // CircleAvatar(radius: 5,backgroundColor: Colors.transparent,),
+              ]
+      
     ),
   ),
 ), 
-                    bottomNavigationBar: //sky3
+                    /*bottomNavigationBar: //sky3
                         sky2==null
                             ? Container()
                             : bN(_currentIndex.toString(), ""),
-                    /*
+                    
                             Controller.animateToPage(2, duration: Duration(milliseconds: 500));
                             */
                     body: sky2==null && sky3 ==null && pic_url ==null&& verifiedx ==null && information ==null
@@ -1623,7 +1696,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             controller: _pageController,
                             children:  [
                                  
-                                 Page1(),Page3(),Page2()//Page3(),Page4(),Page5(),
+                                 Page1(),//Page3(),Page2()//Page3(),Page4(),Page5(),
                                  /*
                                     sourceLatLng: LatLng(lat1, long1),
                           destinationLatLng: LatLng(-1.234, 34.7),
@@ -1637,256 +1710,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                       username: sky2['username'],
                                     )*/
                               ]),
-                    floatingActionButton: _currentIndex != 0 &&
-                            _currentIndex != 2 &&
-                            _currentIndex != 3
-                        ? _currentIndex == 8
-                            ? Container(
-                                child: FloatingActionButton(
-                                    backgroundColor: Colors.blue,
-                                    onPressed: () {
-                                      /*Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => network(
-                                                darkmode:darkmode,
-                                                    userid: int.parse(
-                                                        widget.userid),
-                                                    username:
-                                                        '${"sky2[username]"}',
-                                                    token: widget.token,
-                                                  )));*/
-                                    },
-                                    child: Icon(
-                                      Ionicons.add,
-                                      color: darkmode
-                                          ? Colors.white
-                                          : Colors.black,
-                                    )),
-                              )
-                            : Container()
-                        : SizedBox(
-                            height: 270,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                !open3
-                                    ? const SizedBox()
-                                    : Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: FloatingActionButton(
-                                            tooltip: "Add to revenue",
-                                            backgroundColor:
-                                                Colors.blue.shade900,
-                                            mini: true,
-                                            onPressed: () {
-                                              /*showModalBottomSheet(
-                                                  isScrollControlled: true,
-                                                  context: context,
-                                                  builder: (context) {
-                                                    //  sum = 0;
-                                                    //var given_list = [1, 2, 3, 4, 5];
                   
-                                                    return postM(
-                                                        name:
-                                                            "sky2[username]",
-                                                        image: pic_url,
-                                                        token: widget.token,
-                                                        topics: sky3.reversed
-                                                            .where((k) =>
-                                                                k["username"] ==
-                                                                sky2[
-                                                                    "username"])
-                                                            .take(1)
-                                                            .toList()
-                                                            ?.map(
-                                                              (e) => e[
-                                                                      'skills']
-                                                                  .replaceAll(
-                                                                      "[", "")
-                                                                  .replaceAll(
-                                                                      " ", "")
-                                                                  .replaceAll(
-                                                                      "]", "")
-                                                                  .split(','),
-                                                            )
-                                                            .toList());
-                                                  });*/
-                                            },
-                                            child: const Icon(
-                                                Icons.add_card_outlined)),
-                                      ),
-                                !open3
-                                    ? const SizedBox()
-                                    : Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: FloatingActionButton(
-                                            backgroundColor:
-                                                Colors.blue.shade900,
-                                            tooltip: "Add Task",
-                                            mini: true,
-                                            onPressed: () {
-                                             /* showModalBottomSheet(
-                                                  isScrollControlled: true,
-                                                  context: context,
-                                                  builder: (context) {
-                                                    //  sum = 0;
-                                                    //var given_list = [1, 2, 3, 4, 5];
-                  
-                                                    return postM(
-                                                        name:
-                                                            "sky2[username]",
-                                                        image: pic_url,
-                                                        token: widget.token,
-                                                        topics: sky3.reversed
-                                                            .where((k) =>
-                                                                k["username"] ==
-                                                                sky2[
-                                                                    "username"])
-                                                            .take(1)
-                                                            .toList()
-                                                            ?.map(
-                                                              (e) => e[
-                                                                      'skills']
-                                                                  .replaceAll(
-                                                                      "[", "")
-                                                                  .replaceAll(
-                                                                      " ", "")
-                                                                  .replaceAll(
-                                                                      "]", "")
-                                                                  .split(','),
-                                                            )
-                                                            .toList());
-                                                  });*/
-                                            },
-                                            child: const Icon(Icons.edit_calendar)),
-                                      ),
-                                !open3
-                                    ? const SizedBox()
-                                    : Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: FloatingActionButton(
-                                            backgroundColor:
-                                                Colors.blue.shade900,
-                                            tooltip: "Add event",
-                                            mini: true,
-                                            onPressed: () {
-                                             /* showModalBottomSheet(
-                                                  isScrollControlled: true,
-                                                  context: context,
-                                                  builder: (context) {
-                                                    //  sum = 0;
-                                                    //var given_list = [1, 2, 3, 4, 5];
-                  
-                                                    return postM(
-                                                        name:
-                                                            "sky2[username]",
-                                                        image: pic_url,
-                                                        token: widget.token,
-                                                        topics: sky3.reversed
-                                                            .where((k) =>
-                                                                k["username"] ==
-                                                                sky2[
-                                                                    "username"])
-                                                            .take(1)
-                                                            .toList()
-                                                            ?.map(
-                                                              (e) => e[
-                                                                      'skills']
-                                                                  .replaceAll(
-                                                                      "[", "")
-                                                                  .replaceAll(
-                                                                      " ", "")
-                                                                  .replaceAll(
-                                                                      "]", "")
-                                                                  .split(','),
-                                                            )
-                                                            .toList());
-                                                  });*/
-                                            },
-                                            child: const Icon(
-                                                Ionicons.calendar_outline)),
-                                      ),
-                                /* FloatingActionButton(
-                                        backgroundColor: Colors.blue,
-                                        onPressed: () {},
-                                        tooltip: 'Post',
-                                        child: _currentIndex != 2 && _currentIndex != 3
-                                            ? InkWell(
-                                                onTap: () {
-                                                  setState(() {
-                                                    !open3
-                                                        ? this.open3 = true
-                                                        : this.open3 = false;
-                                                  });
-                                                  /*showModalBottomSheet(
-                                                      isScrollControlled: true,
-                                                      context: context,
-                                                      builder: (context) {
-                                                        //  sum = 0;
-                                                        //var given_list = [1, 2, 3, 4, 5];
-                                
-                                                        return postM(
-                                                            name: "sky2[username]",
-                                                            image: pic_url,
-                                                            token: widget.token,
-                                                            topics: sky3.reversed
-                                                                .where((k) =>
-                                                                    k["username"] ==
-                                                                    "sky2[username]")
-                                                                .take(1)
-                                                                .toList()
-                                                                ?.map(
-                                                                  (e) => e['skills']
-                                                                      .replaceAll("[", "")
-                                                                      .replaceAll(" ", "")
-                                                                      .replaceAll("]", "")
-                                                                      .split(','),
-                                                                )
-                                                                .toList());
-                                                      });*/
-                                                },
-                                                child: Icon(Icons.create))
-                                            : _currentIndex != 3
-                                                ? Icon(Icons.military_tech)
-                                                : InkWell(
-                                                    onTap: () {
-                                                      showModalBottomSheet(
-                                                          isScrollControlled: true,
-                                                          context: context,
-                                                          builder: (context) {
-                                                            //  sum = 0;
-                                                            //var given_list = [1, 2, 3, 4, 5];
-                                
-                                                            return postE(
-                                                                name: "sky2[username]",
-                                                                image: pic_url,
-                                                                token: widget.token,
-                                                                topics: sky3.reversed
-                                                                    .where((k) =>
-                                                                        k["username"] ==
-                                                                        "sky2[username]")
-                                                                    .take(1)
-                                                                    .toList()
-                                                                    ?.map(
-                                                                      (e) => e['skills']
-                                                                          .replaceAll(
-                                                                              "[", "")
-                                                                          .replaceAll(
-                                                                              " ", "")
-                                                                          .replaceAll(
-                                                                              "]", "")
-                                                                          .split(','),
-                                                                    )
-                                                                    .toList());
-                                                          });
-                                                    },
-                                                    child: Icon(Ionicons.add_outline),
-                                                  )),*/
-                              ],
-                            ),
-                          ), // This trailing comma makes auto-formatting nicer for build methods.
-                  ),
+                           ),
                   /*Positioned(
                     top: 200,
                     right:0,
@@ -1946,11 +1771,11 @@ Widget _buildTitleSection(BuildContext context) {
     children: [
       Container(
        // color: Colors.white,
-        height: 150),
+        height: 0),
       Positioned(
         //bottom: 20,
         child: Container(
-          alignment: const Alignment(-1, 1),
+          //alignment: const Alignment(-1, 1),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20.0)
           ),
@@ -1959,21 +1784,21 @@ Widget _buildTitleSection(BuildContext context) {
             text: TextSpan(
               children: [
                 TextSpan(
-                  text: 'Hello\n',
+                  text: 'Home\n',
                   style: GoogleFonts.dmSans(
                     fontSize: 24,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.blue,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black,
                   ),
                 ),
-                TextSpan(
+                /*TextSpan(
                   text: "John Doe,",
                   style: GoogleFonts.dmSans(
                     fontSize: 25,
                     fontWeight: FontWeight.w500, 
                     color: Colors.blue,
                   ),
-                ),
+                ),*/
               ],
             ),
           ),

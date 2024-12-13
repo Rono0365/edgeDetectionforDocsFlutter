@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
-import 'package:edge3/analyzer/docanalyzer.dart';
+//import 'package:edge3/analyzer/docanalyzer.dart';
 import 'package:edge3/pages/mainpage.dart';
 //import 'package:google_mlkit_document_scanner/google_mlkit_document_scanner.dart';
 import 'package:flutter/material.dart';
